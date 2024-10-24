@@ -16,7 +16,6 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         @inertia
-<h2>HALllo</h2>
 <div id="app">
     <increment-counter />
 </div>
