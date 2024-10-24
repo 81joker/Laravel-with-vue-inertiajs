@@ -41,8 +41,8 @@ npm install --save-dev eslint eslint-plugin-vue
 
 Step #1
 install debug laravel
-[text](https://github.com/barryvdh/laravel-debugbar)
+[Clicke here ](https://github.com/barryvdh/laravel-debugbar)
 
 Step #2
 instll Ide helper
-[text](https://github.com/barryvdh/laravel-ide-helper)
+[Clicke here](https://github.com/barryvdh/laravel-ide-helper)
