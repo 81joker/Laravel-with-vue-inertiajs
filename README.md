@@ -45,4 +45,4 @@ install debug laravel
 
 Step #2
 instll Ide helper
-[Clicke here](https://github.com/barryvdh/laravel-ide-helper)
+https://github.com/barryvdh/laravel-ide-helper
