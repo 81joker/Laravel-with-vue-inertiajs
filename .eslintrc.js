@@ -1,7 +1,4 @@
-npm install --save-dev eslint eslint-plugin-vue
-
-    then create .eslintrc.js and past 
-     module.exports = {
+module.exports = {
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
   parserOptions: {
     ecmaVersion: 2020,
@@ -35,14 +32,4 @@ npm install --save-dev eslint eslint-plugin-vue
     ],
     'vue/no-v-text-v-html-on-component': 'off',
   },
-
-
-## npm run fix:eslint
-
-Step #1
-install debug laravel
-[text](https://github.com/barryvdh/laravel-debugbar)
-
-Step #2
-instll Ide helper
-[text](https://github.com/barryvdh/laravel-ide-helper)
+}

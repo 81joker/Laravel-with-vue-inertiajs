@@ -1,7 +1,9 @@
 <template>
   <!-- <MainLayout> -->
     <div>Index</div>
-    <Link href="/show">Show Page</Link>
+    <Link href="/show 
+     c ">
+      Show Page </Link>
     <div>
       The message is {{ message }}
     </div>
