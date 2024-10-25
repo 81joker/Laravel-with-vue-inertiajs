@@ -47,10 +47,12 @@ class ListingController extends Controller
             'price' => 'required|numeric',
         ]);
 
+        // Listing::create($request->all());
         // Create the listing logic here
         Listing::create($data);
 
         return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
+
     }
 
     /**
