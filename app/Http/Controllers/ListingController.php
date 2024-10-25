@@ -37,14 +37,14 @@ class ListingController extends Controller
     {   
         // Validate and create the listing
         $data = $request->validate([
-            'beds' => 'required|integer',
-            'baths' => 'required|integer',
-            'area' => 'required|integer',
-            'city' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            'code' => 'required|string|max:10',
-            'street_nr' => 'required|integer',
-            'price' => 'required|numeric',
+            'beds' => 'required|integer|min:0|max:20',
+            'baths' => 'required|integer|min:0|max:20',
+            'area' => 'required|integer|min:15|max:1500',
+            'city' => 'required',
+            'code' => 'required',
+            'street' => 'required',
+            'street_nr' => 'required|min:1|max:1000',
+            'price' => 'required|integer|min:1|max:20000000',
         ]);
 
         // Listing::create($request->all());
@@ -71,9 +71,14 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Listing $listing)
     {
-        //
+        return inertia(
+            'Listing/Edit',
+            [
+                'listing' => $listing
+            ]
+        );
     }
 
     /**
