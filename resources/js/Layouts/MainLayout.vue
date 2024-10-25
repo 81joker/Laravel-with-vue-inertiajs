@@ -1,6 +1,7 @@
 <template>
     <Link href="/">Main Page</Link>&nbsp;
-    <Link href="/show">Show Page</Link>
+    <Link href="/show">Show Page</Link>&nbsp;
+    <Link href="/listing">listing Page</Link>&nbsp;
     <div>The page with time {{timer}}</div>
     <slot>Default</slot>
   </template>

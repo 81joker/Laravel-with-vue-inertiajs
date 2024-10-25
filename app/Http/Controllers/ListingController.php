@@ -26,15 +26,31 @@ class ListingController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Listing/Create');
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // Validate and create the listing
+        $data = $request->validate([
+            'beds' => 'required|integer',
+            'baths' => 'required|integer',
+            'area' => 'required|integer',
+            'city' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'code' => 'required|string|max:10',
+            'street_nr' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        // Create the listing logic here
+        Listing::create($data);
+
+        return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
     }
 
     /**
