@@ -51,3 +51,8 @@ https://github.com/barryvdh/laravel-ide-helper
 Step #
 install tailwindcss-forms for forms 
 [Tailwindcss Forms ]https://github.com/tailwindlabs/tailwindcss-forms
+
+
+Step #
+install tailwindcss-forms for forms 
+[values returns a string with a language-sensitive representation of this number. ]https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString

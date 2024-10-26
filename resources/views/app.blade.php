@@ -10,11 +10,11 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-
+         @routes
           @vite(['resources/js/app.js', 'resources/css/app.css'])
           @inertiaHead
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+    <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300">
         <h1 class="text-3xl font-bold underline text-red-400">
             Hello world!
           </h1>
