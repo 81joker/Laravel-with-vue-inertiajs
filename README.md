@@ -46,3 +46,8 @@ install debug laravel
 Step #2
 instll Ide helper
 https://github.com/barryvdh/laravel-ide-helper
+
+
+Step #
+install tailwindcss-forms for forms 
+[Tailwindcss Forms ]https://github.com/tailwindlabs/tailwindcss-forms
