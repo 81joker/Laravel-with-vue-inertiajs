@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -27,7 +29,18 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // https://laravel.com/docs/11.x/authentication
+        if (!Auth::attempt($request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string'
+        ]), true)) {
+            // https://annissimo.com/how-to-throw-validationexception-in-laravel-without-request-validation-helpers-or-manually-creating-a-validator
+            throw ValidationException::withMessages([
+                'email' => 'Authentication failed'
+            ]);
+        }
+        $request->session()->regenerate();
+        return redirect()->intended();
     }
 
     /**
@@ -59,6 +72,6 @@ class AuthController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }
