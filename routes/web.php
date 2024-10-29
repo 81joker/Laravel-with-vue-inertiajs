@@ -15,7 +15,7 @@ use App\Http\Controllers\ListingController;
 //     return Inertia('Index/Index');
 // });
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/show', [IndexController::class, 'show']);
+Route::get('/show', [IndexController::class, 'show'])->middleware('auth');
 Route::resource('listing', ListingController::class);
 // ->only(['index', 'show', 'create']);
 
