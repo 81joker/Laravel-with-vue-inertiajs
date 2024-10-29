@@ -39,39 +39,26 @@ class AuthController extends Controller
                 'email' => 'Authentication failed'
             ]);
         }
+
+        // To recreate the current session ID for the user after logging in,
+        //  it creates a new session ID and deletes the old one.
         $request->session()->regenerate();
-        return redirect()->intended();
+
+        // redirect()->intended() هي دالة في  تُستخدم لإعادة توجيه المستخدمين إلى الصفحة التي كانوا ينوون الوصول إليها قبل أن يتم تحويلهم، عادةً إلى صفحة تسجيل الدخول.
+        // Note: If there is no page specified,
+        //  the function will redirect the user to a default path specified within the code as a fallback option.
+
+        return redirect()->intended('/listing');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     //
-    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        
+    public function destroy(Request $request) {
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('listing.index');
+
     }
 }
