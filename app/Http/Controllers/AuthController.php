@@ -56,6 +56,7 @@ class AuthController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request) {
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('listing.index');
