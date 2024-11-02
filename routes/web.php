@@ -5,15 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\UserAccountController;
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome');
-// });
 
-// Route::get('/', function () {
-//     // return Inertia::render('welcome');
-//     return Inertia('Index/Index');
-// });
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/show', [IndexController::class, 'show']);
 Route::resource('listing', ListingController::class);
@@ -28,3 +22,6 @@ Route::post('login', [AuthController::class, 'store'])
   Route::delete('logout', [AuthController::class, 'destroy'])
   ->name('logout');
   
+
+  Route::resource('user-account', UserAccountController::class)
+  ->only(['create','store']);

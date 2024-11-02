@@ -56,3 +56,7 @@ install tailwindcss-forms for forms
 Step #
 install tailwindcss-forms for forms 
 [values returns a string with a language-sensitive representation of this number. ]https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+
+
+
+sudo chmod -R 777 /home/nehad/Laravel/master-laravel-\&-vuejs-fullstack/listings
