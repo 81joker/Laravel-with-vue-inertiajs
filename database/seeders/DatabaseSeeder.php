@@ -18,13 +18,17 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Tim',
             'email' => 'tim26618@gmail.com',
+            'is_admin' => true
         ]);
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Laura',
             'email' => 'laura@gmail.com',
         ]);
-        \App\Models\Listing::factory(20)->create([
+        \App\Models\Listing::factory(10)->create([
             'by_user_id' => 1
+        ]);
+        \App\Models\Listing::factory(10)->create([
+            'by_user_id' => 2
         ]);
     }
 }
