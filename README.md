@@ -60,3 +60,12 @@ install tailwindcss-forms for forms
 
 
 sudo chmod -R 777 /home/nehad/Laravel/master-laravel-\&-vuejs-fullstack/listings
+
+
+
+
+sail artisan cache:clear
+sail artisan view:clear
+sail artisan route:clear
+sail artisan clear-compiled
+sail artisan config:cache

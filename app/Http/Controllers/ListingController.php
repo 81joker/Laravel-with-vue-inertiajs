@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ListingController extends Controller
 {
+    use AuthorizesRequests;
+
+
     // public function __construct(){
     //     $this->middleware("auth")->except(["index"]);
     // }
@@ -51,9 +57,9 @@ class ListingController extends Controller
             'price' => 'required|integer|min:1|max:20000000',
         ]);
 
-        // Listing::create($request->all());
         // Create the listing logic here
-        Listing::create($data);
+        // Listing::create( $data);
+        $request->user()->listings()->create($data);
 
         return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
 
@@ -64,6 +70,12 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
+        // $response = Gate::inspect('view', $listing);
+         // if (Auth::user()->cannot('view', $listing)) {
+        //     abort(403);
+        // }
+        // $this->authorize('view', $listing);
+   
         return inertia(
         'Listing/Show',
         [
