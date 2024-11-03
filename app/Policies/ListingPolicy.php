@@ -9,12 +9,13 @@ use Illuminate\Auth\Access\Response;
 class ListingPolicy
 {
 
-    // public function before(?User $user, $ability)
-    // {
-    //     if ($user->is_admin /*&& $ability === 'update'*/) {
-    //         return true;
-    //     }
-    // }
+    public function before(?User $user, $ability)
+    {
+        if ($user?->is_admin && $ability === 'update') {
+        // if ($user?->is_admin /*&& $ability === 'update'*/) {
+            return true;
+        }
+    }
 
     /**
      * Determine whether the user can view any models.
@@ -37,9 +38,9 @@ class ListingPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Listing $listing): bool
+    public function create(User $user): bool
     {
-        return $user->id === $listing->by_user_id;
+        return true;
     }
 
     /**
@@ -54,7 +55,7 @@ class ListingPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Listing $listing): bool
+    public function delete(?User $user, Listing $listing): bool
     {
         return $user->id === $listing->by_user_id;
     }

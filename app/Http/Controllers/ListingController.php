@@ -6,12 +6,21 @@ use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
+
+
 
 class ListingController extends Controller
 {
     use AuthorizesRequests;
 
+    public function __construct()
+    {
+        $this->authorizeResource(Listing::class, 'listing');
+
+    }
 
     // public function __construct(){
     //     $this->middleware("auth")->except(["index"]);
