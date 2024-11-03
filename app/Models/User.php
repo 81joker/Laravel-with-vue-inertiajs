@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -47,7 +48,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    public function listings(): HasMany
+    {
+        return $this->hasMany(
+            \App\Models\Listing::class,
+            'by_user_id'
+        );
+    }
 // https://laravel.com/docs/11.x/eloquent-mutators#defining-a-mutator
         // camelCase -> kebab_case
         // protected function password(): Attribute

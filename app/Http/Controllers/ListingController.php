@@ -51,9 +51,9 @@ class ListingController extends Controller
             'price' => 'required|integer|min:1|max:20000000',
         ]);
 
-        // Listing::create($request->all());
         // Create the listing logic here
-        Listing::create($data);
+        // Listing::create( $data);
+        $request->user()->listings()->create($data);
 
         return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
 
