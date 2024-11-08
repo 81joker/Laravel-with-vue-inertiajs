@@ -31,5 +31,6 @@ Route::post('login', [AuthController::class, 'store'])
   ->name('realtor.')
   ->middleware('auth')
   ->group(function () {
-    Route::resource('listing', RealtorListingController::class);
+    Route::resource('listing', RealtorListingController::class)
+    ->only(['index', 'destroy']);
   });
