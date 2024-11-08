@@ -10,8 +10,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Listing extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $guarded = []; 
+    use HasFactory, SoftDeletes;
+    // protected $guarded = [];
+    protected $fillable = [
+        'beds',
+        'baths',
+        'area',
+        'city',
+        'code',
+        'street',
+        'street_nr',
+        'price'
+    ];
+    protected $sortable = [
+        'price',
+        'created_at'
+    ];
     public function owner(): BelongsTo
     {
         return $this->belongsTo(
@@ -28,22 +42,32 @@ class Listing extends Model
     {
         return $query->when(
             $filters['priceFrom'] ?? false,
-            fn ($query, $value) => $query->where('price', '>=', $value)
+            fn($query, $value) => $query->where('price', '>=', $value)
         )->when(
             $filters['priceTo'] ?? false,
-            fn ($query, $value) => $query->where('price', '<=', $value)
+            fn($query, $value) => $query->where('price', '<=', $value)
         )->when(
             $filters['beds'] ?? false,
-            fn ($query, $value) => $query->where('beds', (int)$value < 6 ? '=' : '>=', $value)
+            fn($query, $value) => $query->where('beds', (int)$value < 6 ? '=' : '>=', $value)
         )->when(
             $filters['baths'] ?? false,
-            fn ($query, $value) => $query->where('baths', (int)$value < 6 ? '=' : '>=', $value)
+            fn($query, $value) => $query->where('baths', (int)$value < 6 ? '=' : '>=', $value)
         )->when(
             $filters['areaFrom'] ?? false,
-            fn ($query, $value) => $query->where('area', '>=', $value)
+            fn($query, $value) => $query->where('area', '>=', $value)
         )->when(
             $filters['areaTo'] ?? false,
-            fn ($query, $value) => $query->where('area', '<=', $value)
+            fn($query, $value) => $query->where('area', '<=', $value)
+
+        )->when(
+            $filters['deleted'] ?? false,
+            fn($query, $value) => $query->withTrashed()
+        )->when(
+            $filters['by'] ?? false,
+            fn($query, $value) =>
+            !in_array($value, $this->sortable)
+                ? $query :
+                $query->orderBy($value, $filters['order'] ?? 'desc')
         );
     }
     // Listing:: create([
