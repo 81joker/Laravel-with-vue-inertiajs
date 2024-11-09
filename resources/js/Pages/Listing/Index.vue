@@ -9,11 +9,11 @@
           <ListingAddress :listing="listing" class="text-gray-500" />
         </Link>
       </div>
-      <div>
+      <!-- <div>
         <Link :href="route('listing.edit', { listing: listing.id })">
           Edit
         </Link>
-      </div>
+      </div> -->
       <div>
         <Link
           :href="route('listing.destroy', { listing: listing.id })"
