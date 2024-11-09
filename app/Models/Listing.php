@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -38,6 +39,11 @@ class Listing extends Model
         return $query->orderByDesc('created_at');
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ListingImage::class);
+    }
+    
     public function scopeFilter(Builder $query, array $filters): Builder
     {
         return $query->when(
