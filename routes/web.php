@@ -11,8 +11,9 @@ use App\Http\Controllers\RealtorListingController;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/show', [IndexController::class, 'show'])->middleware('auth');
-Route::resource('listing', ListingController::class);
-// ->only(['index', 'show', 'create']);
+Route::resource('listing', ListingController::class)  
+->only(['index', 'show']);
+
 
 Route::get('login', [AuthController::class, 'create'])
   ->name('login');
@@ -27,10 +28,18 @@ Route::post('login', [AuthController::class, 'store'])
   Route::resource('user-account', UserAccountController::class)
   ->only(['create','store']);
   
+
   Route::prefix('realtor')
   ->name('realtor.')
   ->middleware('auth')
   ->group(function () {
+
+    Route::name('listing.restore')
+    ->put(
+      'listing/{listing}/restore',
+      [RealtorListingController::class, 'restore']
+    )->withTrashed();
+      
     Route::resource('listing', RealtorListingController::class)
-    ->only(['index', 'destroy']);
+    ->only(['index','show','destroy','create' ,'store', 'edit','update']) ->withTrashed();
   });
