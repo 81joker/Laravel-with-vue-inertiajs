@@ -33,6 +33,13 @@ Route::post('login', [AuthController::class, 'store'])
   ->name('realtor.')
   ->middleware('auth')
   ->group(function () {
+
+    Route::name('listing.restore')
+    ->put(
+      'listing/{listing}/restore',
+      [RealtorListingController::class, 'restore']
+    )->withTrashed();
+      
     Route::resource('listing', RealtorListingController::class)
-    ->only(['index', 'destroy','create' ,'store', 'edit','update']);
+    ->only(['index','show','destroy','create' ,'store', 'edit','update']) ->withTrashed();
   });

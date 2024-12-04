@@ -30,6 +30,7 @@ class RealtorListingController extends Controller
         //     // Only include soft-deleted records
         //     $query->onlyTrashed()->get();
         // }
+        // dd(Auth::user()->listings());
         return inertia(
             'Realtor/Index',
             [
@@ -43,6 +44,25 @@ class RealtorListingController extends Controller
                 // 'listings' =>  $query,
             ]
         );
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Listing $listing)
+    {
+        // $response = Gate::inspect('view', $listing);
+         // if (Auth::user()->cannot('view', $listing)) {
+        //     abort(403);
+        // }
+        // $this->authorize('view', $listing);
+   
+        return inertia(
+        'Realtor/Show',
+        [
+            'listing' => $listing
+        ]
+    );
     }
 
  /**
@@ -120,6 +140,11 @@ class RealtorListingController extends Controller
         $listing->deleteOrFail();
         return redirect()->back()
             ->with('success', 'Listing was deleted!');
+    }
+    public function restore(Listing $listing)
+    {
+        $listing->restore();
+        return redirect()->back()->with('success', 'Listing was restored!');
     }
     
 }

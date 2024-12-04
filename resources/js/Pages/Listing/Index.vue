@@ -15,13 +15,13 @@
         </Link>
       </div> -->
       <div>
-        <Link
+        <!-- <Link
           :href="route('listing.destroy', { listing: listing.id })"
           method="DELETE"
           as="button"
         >
           Delete
-        </Link>
+        </Link> -->
       </div>
     </Box>
   </div>
