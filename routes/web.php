@@ -7,6 +7,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\RealtorListingController;
+use App\Http\Controllers\RealtorListingImageController;
 
 
 Route::get('/', [IndexController::class, 'index']);
@@ -42,4 +43,7 @@ Route::post('login', [AuthController::class, 'store'])
       
     Route::resource('listing', RealtorListingController::class)
     ->only(['index','show','destroy','create' ,'store', 'edit','update']) ->withTrashed();
+
+    Route::resource('listing.image', RealtorListingImageController::class)
+    ->only(['create', 'store','destroy']);
   });

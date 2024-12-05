@@ -38,6 +38,7 @@ class RealtorListingController extends Controller
                 'listings' => Auth::user()->listings()
                     // ->mostRecent()
                     ->filter($filters)
+                    ->withCount('images')
                     ->paginate(4)
                     ->withQueryString()
                 // 'filters' =>  $filters,

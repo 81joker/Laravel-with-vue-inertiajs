@@ -2,63 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
+use App\Models\ListingImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RealtorListingImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    public function create(Listing $listing)
     {
-        //
+        $listing->load(['images']);
+        return inertia(
+            'Realtor/ListingImage/Create',
+            ['listing' => $listing]
+        );
+    }
+    public function store(Listing $listing, Request $request)
+    {
+        if ($request->hasFile('images')) {
+
+            $request->validate([
+                'images.*' => 'mimes:jpg,png,jpeg,webp|max:5000'
+            ], [
+                'images.*.mimes' => 'The file should be in one of the formats: jpg, png, jpeg, webp'
+            ]);
+
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('images', 'public');
+                $listing->images()->save(new ListingImage([
+                    'filename' => $path
+                ]));
+            }
+        }
+        return redirect()->back()->with('success', 'Images uploaded!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy(Listing $listing, ListingImage $image)
     {
-        //
+        Storage::disk('public')->delete($image->filename);
+        $image->delete();
+        return redirect()->back()->with('success', 'Image was deleted!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
