@@ -30,11 +30,14 @@
           </div>
         </div>
       </Box>
+
+      <MakeOffer :listing-id="listing.id" :price="listing.price" />
     </div>
   </div>
 </template>
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import MakeOffer from '@/Pages/Listing/Show/Components/MakeOffer.vue'
 import ListingSpace from "@/Components/ListingSpace.vue";
 import Price from "@/Components/Price.vue";
 import Box from "../../Components/UI/Box.vue";

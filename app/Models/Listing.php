@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Offer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,6 +45,10 @@ class Listing extends Model
         return $this->hasMany(ListingImage::class);
     }
     
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class, 'listing_id');
+    }
     public function scopeFilter(Builder $query, array $filters): Builder
     {
         return $query->when(
