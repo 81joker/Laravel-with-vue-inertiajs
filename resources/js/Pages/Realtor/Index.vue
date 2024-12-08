@@ -16,9 +16,12 @@
         </div>
         <section>
           <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-          <a 
-          :href="route('realtor.listing.show', { listing: listing.id })"
-          class="btn-outline text-xs font-medium" target="_blank">Preview</a>
+            <a
+              class="btn-outline text-xs font-medium"
+              :href="route('listing.show', { listing: listing.id })"
+              target="_blank"
+            >Preview</a>
+
           <Link 
           :href="route('realtor.listing.edit', { listing: listing.id })" 
             as="button" 
