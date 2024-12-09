@@ -101,12 +101,21 @@ class ListingController extends Controller
         //     abort(403);
         // }
         // $this->authorize('view', $listing);
+
+
+        $offer = !Auth::user() ? null : $listing->offers()->byMe()->first();
+        // if (Auth::user()) {
+        //     $offer = $listing->offers()->where('bidder_id', Auth::id())->first();
+        //     // $offer = $listing->offers()->where('bidder_id', Auth::user()?->id)->first();
+        // }
+// dd($offer);
         $listing->load(['images']);
                 // dd($listing);
         return inertia(
         'Listing/Show',
         [
-            'listing' => $listing
+            'listing' => $listing,
+            'offerMade' => $offer
         ]
     );
     }
