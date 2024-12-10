@@ -48,7 +48,8 @@ Route::post('login', [AuthController::class, 'store'])
     )->withTrashed();
       
     Route::resource('listing', RealtorListingController::class)
-    ->only(['index','show','destroy','create' ,'store', 'edit','update']) ->withTrashed();
+    // ->only(['index','show','destroy','create' ,'store', 'edit','update'])
+     ->withTrashed();
 
     Route::resource('listing.image', RealtorListingImageController::class)
     ->only(['create', 'store','destroy']);

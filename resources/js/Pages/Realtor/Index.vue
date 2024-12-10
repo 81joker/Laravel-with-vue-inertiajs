@@ -5,7 +5,7 @@
     <RealtorFilters :filters="filters" />
   </section>
   <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-    <Box v-for="listing in listings.data" :key="listing.id" :class="{ 'border-dashed': listing.deleted_at }" >
+    <Box v-for="listing in listings.data" :key="listing.id" :class="{ 'border-dashed': listing.deleted_at }">
       <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
         <div :class="{ 'opacity-25': listing.deleted_at }">
           <div class="xl:flex items-center gap-2">
@@ -16,45 +16,38 @@
         </div>
         <section>
           <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-            <a
-              class="btn-outline text-xs font-medium"
-              :href="route('listing.show', { listing: listing.id })"
-              target="_blank"
-            >Preview</a>
+            <a class="btn-outline text-xs font-medium" :href="route('listing.show', { listing: listing.id })"
+              target="_blank">Preview</a>
 
-          <Link 
-          :href="route('realtor.listing.edit', { listing: listing.id })" 
-            as="button" 
-          class="btn-outline text-xs font-medium">Edit</Link>
+            <Link :href="route('realtor.listing.edit', { listing: listing.id })" as="button"
+              class="btn-outline text-xs font-medium">Edit</Link>
 
-          <Link 
-          v-if="!listing.deleted_at"
-          class="btn-outline text-xs font-medium"
-            :href="route('realtor.listing.destroy', { listing: listing.id })" 
-            as="button" method="delete"
-          >
+            <Link v-if="!listing.deleted_at" class="btn-outline text-xs font-medium"
+              :href="route('realtor.listing.destroy', { listing: listing.id })" as="button" method="delete">
             Delete
-          </Link>
+            </Link>
 
-          <Link
-            v-else 
-            class="btn-outline text-xs font-medium" 
-            :href="route('realtor.listing.restore', { listing: listing.id })"
-            as="button" 
-            method="put"
-          >
+            <Link v-else class="btn-outline text-xs font-medium"
+              :href="route('realtor.listing.restore', { listing: listing.id })" as="button" method="put">
             Restore
-          </Link>
-        </div>
-        <div class="mt-2">
-            <Link 
-              :href="route('realtor.listing.image.create', { listing: listing.id })" 
-              class="block w-full btn-outline text-xs font-medium text-center"
-            >
-              Images ({{ listing.images_count }})
             </Link>
           </div>
-          </section>
+          <div class="mt-2">
+            <Link :href="route('realtor.listing.image.create', { listing: listing.id })"
+              class="block w-full btn-outline text-xs font-medium text-center">
+            Images ({{ listing.images_count }})
+            </Link>
+          </div>
+
+          <!-- Count Offers -->
+          <div class="mt-2">
+            <Link :href="route('realtor.listing.show', { listing: listing.id })"
+              class="block w-full btn-outline text-xs font-medium text-center">
+            Offers ({{ listing.offers_count }})
+            </Link>
+          </div>
+
+        </section>
       </div>
     </Box>
   </section>
@@ -75,7 +68,7 @@ import Pagination from '@/Components/UI/Pagination.vue'
 defineProps({
   listings: Object,
   // listings: Array,
-  filters: Object, 
+  filters: Object,
 
-  })
+})
 </script>
