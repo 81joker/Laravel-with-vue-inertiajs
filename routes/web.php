@@ -9,6 +9,7 @@ use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
+use App\Http\Controllers\RealtorListingAcceptOfferController;
 
 
 Route::get('/', [IndexController::class, 'index']);
@@ -50,6 +51,12 @@ Route::post('login', [AuthController::class, 'store'])
     Route::resource('listing', RealtorListingController::class)
     // ->only(['index','show','destroy','create' ,'store', 'edit','update'])
      ->withTrashed();
+
+     Route::name('offer.accept')
+     ->put(
+       'offer/{offer}/accept',
+       RealtorListingAcceptOfferController::class
+     );
 
     Route::resource('listing.image', RealtorListingImageController::class)
     ->only(['create', 'store','destroy']);

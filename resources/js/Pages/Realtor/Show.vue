@@ -6,7 +6,7 @@
       ← Go back to Listings
     </Link>
   </div>
-<h1>{{hasOffers }}</h1>
+
   <section class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
     <Box v-if="!hasOffers" class="flex md:col-span-7 items-center">
       <div class="w-full text-center font-medium text-gray-500">
@@ -14,9 +14,13 @@
       </div>
     </Box>
     <div v-else class="md:col-span-7 items-center">
-      This is displayed when there are offers!
+      <Offer
+        v-for="offer in listing.offers" 
+        :key="offer.id" class="mb-4"
+        :offer="offer"
+        :listing-price="listing.price"
+      />
     </div>
-
 
     <Box class="md:col-span-5">
       <template #header>Basic Info</template>
@@ -35,6 +39,7 @@ import Price from '@/Components/Price.vue'
 import Box from '@/Components/UI/Box.vue'
 import { Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
+import Offer from '@/Pages/Realtor/Show/Components/Offer.vue'
 
 const props = defineProps({ listing: Object })
 

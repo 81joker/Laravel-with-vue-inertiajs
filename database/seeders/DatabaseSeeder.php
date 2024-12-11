@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'tim26618@gmail.com',
             'is_admin' => true
         ]);
+
+        User::factory()->create([
+            'name' => 'Nehad',
+            'email' => 'nehad@gmail.com',
+        ]);
         User::factory()->create([
             'name' => 'Laura',
             'email' => 'laura@gmail.com',
