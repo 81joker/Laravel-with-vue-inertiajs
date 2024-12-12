@@ -55,13 +55,15 @@ class ListingController extends Controller
         // if ($filters['areaTo'] ?? false) {
         //     $query->where('area', '<=', $filters['areaTo']);
         // }
-
         return inertia(
             'Listing/Index',
             [
                 'filters' => $filters,
                 // 'listings' => $query->paginate(10),
-                'listings' => Listing::mostRecent()->filter($filters)->paginate(10)->withQueryString()
+                'listings' => Listing::mostRecent()
+                ->withoutSold()
+                ->filter($filters)->
+                paginate(10)->withQueryString()
                 // 'filters' => $request->only([
                 //     'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
                 // ]),
@@ -108,7 +110,6 @@ class ListingController extends Controller
         //     $offer = $listing->offers()->where('bidder_id', Auth::id())->first();
         //     // $offer = $listing->offers()->where('bidder_id', Auth::user()?->id)->first();
         // }
-// dd($offer);
         $listing->load(['images']);
                 // dd($listing);
         return inertia(
@@ -119,15 +120,4 @@ class ListingController extends Controller
         ]
     );
     }
-
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Listing $listing)
-    // {
-    //     $listing->delete();
-    //     return redirect()->back()
-    //         ->with('success', 'Listing was deleted!');
-    // }
 }
