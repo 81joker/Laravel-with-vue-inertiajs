@@ -57,8 +57,7 @@
   const emit = defineEmits(['offerUpdated'])
 
   // watch(()=>form.amount,  ()=> emit('offerUpdated'))
-  watch(
-  () => form.amount, 
-  debounce((value) => emit('offerUpdated', value), 200),
+  // https://developer.mozilla.org/en-US/docs/Web/API/Window/event
+  watch(() => form.amount,debounce((value) => emit('offerUpdated', value), 200),
 )
 </script>

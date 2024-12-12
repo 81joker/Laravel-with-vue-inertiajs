@@ -3,6 +3,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
     <Box v-for="listing in listings.data" :key="listing.id">
       <div>
+        <h4 >{{ listing?.owner?.name || 'Unknown' }}</h4>
         <Link :href="route('listing.show', { listing: listing.id })">
           <Price :price="listing.price" class="text-2xl font-bold" />
           <ListingSpace :listing="listing" class="text-lg" />
